@@ -8,7 +8,6 @@ function Navbar() {
   // TODO: Withdraw
   // TODO: Loan
   // TODO: Pay
-  //
 
   return (
     <Nav>
