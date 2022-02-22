@@ -2,6 +2,8 @@ import Wallet from "../Wallet";
 import { Logo, Nav, NavItem, NavItemWrapper } from "./styles";
 
 function Navbar() {
+  // TODO: show wallet balance when wallet is connected
+
   return (
     <Nav>
       <NavItemWrapper>
