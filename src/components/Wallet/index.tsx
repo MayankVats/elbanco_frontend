@@ -1,18 +1,18 @@
+import { ethers } from "ethers";
 import React, { useContext } from "react";
 import { WalletBtn } from "./styles";
-import Web3 from "web3";
 import { WalletContext } from "./WalletContext";
 
 function Wallet() {
-  const { setWeb3, setAccount } = useContext(WalletContext);
+  const { setProvider, setAccount } = useContext(WalletContext);
 
   async function handleClick() {
     // @ts-ignore
     const { ethereum } = window;
 
     if (ethereum && ethereum.isMetaMask) {
-      const web3 = new Web3(ethereum);
-      setWeb3(web3);
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      setProvider(provider);
 
       const accounts = await ethereum.request({
         method: "eth_requestAccounts",

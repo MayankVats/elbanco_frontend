@@ -3,11 +3,11 @@ import { WalletContext } from "../Wallet/WalletContext";
 import { MetricsWrapper, Wrapper } from "./styles";
 
 function Home() {
-  const { web3, account } = useContext(WalletContext);
+  const { provider, account } = useContext(WalletContext);
 
   useEffect(() => {
-    console.log("[Home.tsx]", web3, account);
-  }, [web3, account]);
+    console.log("[Home.tsx]", provider, account);
+  }, [provider, account]);
 
   // TODO: fetch deposited, Interest earned and Loan of the user when wallet is connected.
 
