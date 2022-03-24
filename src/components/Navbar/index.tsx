@@ -1,36 +1,31 @@
+import { ethers } from "ethers";
 import { useContext } from "react";
+import Bank from "../../blockchain/abis/Bank";
+import { BankAddress } from "../../blockchain/contractAddresses";
+import { ModalContext } from "../Modal/ModalContext";
 import Wallet from "../Wallet";
 import { WalletContext } from "../Wallet/WalletContext";
 import { Logo, Nav, NavItem, NavItemWrapper } from "./styles";
 
 function Navbar() {
   const { signer, account } = useContext(WalletContext);
-  // TODO: show wallet balance when wallet is connected
+  const { showModal, setShowModal, setAction } = useContext(ModalContext);
 
-  // TODO: Deposit
-  async function handleDeposit() {
-    if (account) {
-    } else {
-      alert("Connect Metamask!");
-    }
-  }
   // TODO: Withdraw
   async function handleWithdraw() {
     if (account) {
+      console.log("Withdraw");
+      const bankContract = new ethers.Contract(BankAddress, Bank.abi, signer);
     } else {
       alert("Connect Metamask!");
     }
   }
-  // TODO: Loan
-  async function handleLoan() {
-    if (account) {
-    } else {
-      alert("Connect Metamask!");
-    }
-  }
+
   // TODO: Pay
   async function handleRepay() {
     if (account) {
+      const bankContract = new ethers.Contract(BankAddress, Bank.abi, signer);
+      console.log("Repay");
     } else {
       alert("Connect Metamask!");
     }
@@ -40,10 +35,24 @@ function Navbar() {
     <Nav>
       <NavItemWrapper>
         <Logo>El Banco</Logo>
-        <NavItem>Deposit</NavItem>
-        <NavItem>Withdraw</NavItem>
-        <NavItem>Loan</NavItem>
-        <NavItem>Repay</NavItem>
+        <NavItem
+          onClick={() => {
+            setShowModal(false);
+            setAction("Deposit");
+          }}
+        >
+          Deposit
+        </NavItem>
+        <NavItem onClick={handleWithdraw}>Withdraw</NavItem>
+        <NavItem
+          onClick={() => {
+            setShowModal(false);
+            setAction("Loan");
+          }}
+        >
+          Loan
+        </NavItem>
+        <NavItem onClick={handleRepay}>Repay</NavItem>
       </NavItemWrapper>
       <Wallet></Wallet>
     </Nav>

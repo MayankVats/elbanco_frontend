@@ -2,11 +2,15 @@ import { ethers } from "ethers";
 import { useContext, useEffect, useState } from "react";
 import Bank from "../../blockchain/abis/Bank";
 import { BankAddress } from "../../blockchain/contractAddresses";
+import Modal from "../Modal";
+import { ModalContext } from "../Modal/ModalContext";
+import { Main } from "../Modal/styles";
 import { WalletContext } from "../Wallet/WalletContext";
 import { MetricsWrapper, Wrapper } from "./styles";
 
 function Home() {
   const { provider, account, signer } = useContext(WalletContext);
+  const { showModal } = useContext(ModalContext);
   const [metrics, setMetrics] = useState({
     deposited: "",
     interestEarned: "",
@@ -38,12 +42,14 @@ function Home() {
 
   return (
     <Wrapper>
+      <Modal hide={showModal} />
       <h1>Welcome To El Banco!</h1>
       <MetricsWrapper>
         <div>Deposited: {metrics.deposited}</div>
         <div>Interest Earned: {metrics.interestEarned}</div>
         <div>Loan: {metrics.loan}</div>
       </MetricsWrapper>
+      {showModal ? <></> : <Main />}
     </Wrapper>
   );
 }
