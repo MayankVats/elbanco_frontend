@@ -1,0 +1,2 @@
+export const BankAddress = "0x04B11f06FD1eC733651F86262458cbBA0B73C26b";
+export const TokenAddress = "0x565412B9E9983F6e85cdb17d27579c885BB148BA";
